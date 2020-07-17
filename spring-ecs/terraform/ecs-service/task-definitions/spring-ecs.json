@@ -1,0 +1,36 @@
+[
+  {
+    "name": "springecs",
+    "image": "963419467435.dkr.ecr.eu-west-1.amazonaws.com/ecs_test:0.0.1-RELEASE",
+    "cpu": 256,
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 8080,
+        "hostPort": 8080
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/ecs/fargate-task-definition",
+        "awslogs-region": "eu-west-1",
+        "awslogs-stream-prefix": "ecs"
+      }
+    },
+    "environment": [
+      {
+        "name": "SPRING_DATASOURCE_URL",
+        "value": "${var.db_url}"
+      },
+      {
+        "name": "SPRING_DATASOURCE_USERNAME",
+        "value": "${var.db_user}"
+      },
+      {
+        "name": "SPRING_DATASOURCE_PASSWORD",
+        "value": "${var.db_password}"
+      }
+    ]
+  }
+]
