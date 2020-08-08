@@ -35,3 +35,6 @@ variable "db_password" {
   description = "The database password"
 }
 
+variable "docker_image_arn" {
+  description = "ARN of the docker image in AWS"
+}
