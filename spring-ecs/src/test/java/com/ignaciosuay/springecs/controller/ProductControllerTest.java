@@ -1,5 +1,6 @@
 package com.ignaciosuay.springecs.controller;
 
+import com.ignaciosuay.springecs.controller.dto.ProductDto;
 import com.ignaciosuay.springecs.model.Product;
 import com.ignaciosuay.springecs.repository.ProductRepository;
 import org.junit.Test;
@@ -33,11 +34,13 @@ public class ProductControllerTest {
     @Test
     public void saveNewProduct() {
         //Given
+        String productId = UUID.randomUUID().toString();
         String productName = "newProduct";
+        ProductDto productDto = ProductDto.builder().id(productId).name(productName).build();
 
         //When
         String url = "http://localhost:" + port + "/products";
-        ResponseEntity<Product> result = restTemplate.postForEntity(url, productName, Product.class);
+        ResponseEntity<Product> result = restTemplate.postForEntity(url, productDto, Product.class);
 
         //Then
         assertThat(result.getBody().getId()).isNotNull();

@@ -59,7 +59,7 @@ data "aws_secretsmanager_secret_version" "rds" {
 
 module "ecs_service" {
   source = "./ecs-service"
-  db_password = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["username"]
+  db_password = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["password"]
   db_url = module.rds.rds_url
   db_user = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["username"]
   ecs_cluster_id = module.ecs.this_ecs_cluster_id
@@ -113,8 +113,8 @@ module "rds" {
   environment       = "dev"
   allocated_storage = "20"
   database_name     = var.database_name
-  database_username = var.database_username
-  database_password = var.database_password
+  database_username = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["username"]
+  database_password = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["password"]
   subnet_ids        = [module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
 //  subnet_ids        = ["10.1.1.0/24", "10.1.2.0/24"]
   vpc_id            = module.vpc.vpc_id

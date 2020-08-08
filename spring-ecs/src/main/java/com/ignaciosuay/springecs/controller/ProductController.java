@@ -1,5 +1,6 @@
 package com.ignaciosuay.springecs.controller;
 
+import com.ignaciosuay.springecs.controller.dto.ProductDto;
 import com.ignaciosuay.springecs.model.Product;
 import com.ignaciosuay.springecs.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,9 +33,8 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public Product saveProduct(@RequestBody String name) {
-        log.info("Save product witn name: {}", name);
-        Product product = Product.builder().id(UUID.randomUUID()).name(name).build();
-        return productRepository.save(product);
+    public Product saveProduct(@RequestBody ProductDto product) {
+        log.info("Save product witn name: {}", product);
+        return productRepository.save(product.toProduct());
     }
 }

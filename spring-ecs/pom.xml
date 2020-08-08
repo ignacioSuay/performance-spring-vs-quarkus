@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.ignaciosuay</groupId>
     <artifactId>spring-ecs</artifactId>
-    <version>0.0.1-RELEASE</version>
+    <version>0.0.2-RELEASE</version>
     <name>spring-ecs</name>
     <description>POC for AWS ECS</description>
 

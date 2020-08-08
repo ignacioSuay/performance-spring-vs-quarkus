@@ -27,20 +27,18 @@ resource "aws_ecs_task_definition" "springecs" {
         "awslogs-stream-prefix": "ecs"
       }
     },
-    "secrets": [
-      {
-        "name": "SPRING_DATASOURCE_USERNAME",
-        "valueFrom": "${var.db_user}"
-      },
-      {
-        "name": "SPRING_DATASOURCE_PASSWORD",
-        "valueFrom": "${var.db_password}"
-      }
-    ],
     "environment": [
       {
         "name": "SPRING_DATASOURCE_URL",
         "value": "${var.db_url}"
+      },
+      {
+        "name": "SPRING_DATASOURCE_USERNAME",
+        "value": "${var.db_user}"
+      },
+      {
+        "name": "SPRING_DATASOURCE_PASSWORD",
+        "value": "${var.db_password}"
       }
     ]
   }
