@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Data
@@ -20,6 +21,7 @@ public class ProductDto {
         return Product.builder()
                 .id(UUID.fromString(id))
                 .name(name)
+                .instant(Instant.now())
                 .build();
     }
 }

@@ -43,7 +43,7 @@ public class ProductControllerTest {
         ResponseEntity<Product> result = restTemplate.postForEntity(url, productDto, Product.class);
 
         //Then
-        assertThat(result.getBody().getId()).isNotNull();
+        assertThat(result.getBody().getId()).isEqualTo(UUID.fromString(productId));
         assertThat(result.getBody().getName()).isEqualTo(productName);
 
         //And

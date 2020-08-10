@@ -10,7 +10,7 @@ resource "aws_ecs_task_definition" "springecs" {
     [
   {
     "name": "springecs",
-    "image": "963419467435.dkr.ecr.eu-west-1.amazonaws.com/ecs_test:0.0.1-RELEASE",
+    "image": "${var.docker_image_arn}",
     "cpu": 256,
     "essential": true,
     "portMappings": [

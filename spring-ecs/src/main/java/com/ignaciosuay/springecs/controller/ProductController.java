@@ -5,6 +5,8 @@ import com.ignaciosuay.springecs.model.Product;
 import com.ignaciosuay.springecs.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +29,9 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public List<Product> getAll() {
-        log.info("Find all products");
-        return productRepository.findAll();
+    public List<Product> getLatest() {
+        log.info("Find latest 20 products");
+        return productRepository.findAll(PageRequest.of(0, 20, Sort.by("instant").descending())).toList();
     }
 
     @PostMapping("/products")

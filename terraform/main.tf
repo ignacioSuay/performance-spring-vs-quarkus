@@ -53,7 +53,7 @@ data "aws_secretsmanager_secret_version" "rds" {
 }
 
 module "ecs_service" {
-  source = "ecs-service"
+  source = "./ecs-service"
   db_password = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["password"]
   db_url = module.rds.rds_url
   db_user = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["username"]
@@ -68,7 +68,7 @@ module "ecs_service" {
 
 #----- RDS  Services--------
 module "rds" {
-  source            = "rds"
+  source            = "./rds"
   environment       = "dev"
   allocated_storage = "20"
   database_name     = var.database_name

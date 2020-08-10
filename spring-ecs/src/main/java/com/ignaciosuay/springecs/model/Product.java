@@ -8,6 +8,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -21,4 +22,5 @@ public class Product {
     @Type(type = "uuid-char")
     private UUID id;
     private String name;
+    private Instant instant;
 }
