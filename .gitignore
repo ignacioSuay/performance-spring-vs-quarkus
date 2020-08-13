@@ -33,3 +33,16 @@ build/
 ## terraform
 terraform.tfvars
 .terraform
+
+## Docker
+!target/*-runner
+!target/*-runner.jar
+!target/lib/*
+!target/quarkus-app/*
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
