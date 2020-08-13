@@ -31,4 +31,4 @@ If you want to learn more about building native executables, please consult http
 
 # Create a docker image
 
-./mvnw package -Dquarkus.container-image.build=true -DskipTests --name=quarkus-ecs
+./mvnw package -Dquarkus.container-image.build=true -DskipTests
