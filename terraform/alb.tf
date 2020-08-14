@@ -21,7 +21,7 @@ resource "aws_alb_target_group" "springecs" {
   target_type = "ip"
 
   health_check {
-    path = "/actuator/health"
+    path = "/health"
   }
 }
 

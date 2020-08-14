@@ -7,7 +7,7 @@ import scala.concurrent.duration._
 class BasicSimulation extends Simulation {
 
   val httpProtocol = http
-    .baseUrl("http://springEcs-862373402.eu-west-1.elb.amazonaws.com") // Here is the root for all relative URLs
+    .baseUrl("http://springecs-41565405.eu-west-1.elb.amazonaws.com/") // Here is the root for all relative URLs
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8") // Here are the common headers
     .acceptEncodingHeader("gzip, deflate")
     .acceptLanguageHeader("en-US,en;q=0.5")

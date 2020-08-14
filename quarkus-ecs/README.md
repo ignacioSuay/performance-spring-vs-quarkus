@@ -31,4 +31,15 @@ If you want to learn more about building native executables, please consult http
 
 # Create a docker image
 
-./mvnw package -Dquarkus.container-image.build=true -DskipTests
+./mvnw clean package -Dquarkus.container-image.build=true -DskipTests
+
+# Export Datasource Environment variables
+export QUARKUS_DATASOURCE_JDBC_URL=jdbc:mysql://localhost:3306/db
+export QUARKUS_DATASOURCE_USERNAME=user
+export QUARKUS_DATASOURCE_PASSWORD=password
+
+# Docker command
+docker run -p 8080:8080 -e QUARKUS_DATASOURCE_JDBC_URL="jdbc:mysql://mysql:3306/db" \
+-e QUARKUS_DATASOURCE_USERNAME=user \
+-e QUARKUS_DATASOURCE_PASSWORD=password \
+quarkus-ecs:0.0.4-RELEASE

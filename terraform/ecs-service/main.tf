@@ -29,15 +29,15 @@ resource "aws_ecs_task_definition" "springecs" {
     },
     "environment": [
       {
-        "name": "SPRING_DATASOURCE_URL",
+        "name": "${var.db_url_param}",
         "value": "${var.db_url}"
       },
       {
-        "name": "SPRING_DATASOURCE_USERNAME",
+        "name": "${var.db_user_param}",
         "value": "${var.db_user}"
       },
       {
-        "name": "SPRING_DATASOURCE_PASSWORD",
+        "name": "${var.db_password_param}",
         "value": "${var.db_password}"
       }
     ]

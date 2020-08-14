@@ -67,7 +67,7 @@ resource "aws_db_instance" "rds" {
   identifier             = "${var.environment}-database"
   allocated_storage      = var.allocated_storage
   engine                 = "mysql"
-  engine_version         = "5.7"
+  engine_version         = "8.0.17"
   instance_class         = var.instance_class
   multi_az               = var.multi_az
   name                   = var.database_name
