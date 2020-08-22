@@ -7,7 +7,7 @@ import scala.concurrent.duration._
 class BasicSimulation extends Simulation {
 
   val httpProtocol = http
-    .baseUrl("http://springecs-41565405.eu-west-1.elb.amazonaws.com/") // Here is the root for all relative URLs
+    .baseUrl("http://springEcs-2140895847.eu-west-1.elb.amazonaws.com") // Here is the root for all relative URLs
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8") // Here are the common headers
     .acceptEncodingHeader("gzip, deflate")
     .acceptLanguageHeader("en-US,en;q=0.5")
@@ -27,7 +27,7 @@ class BasicSimulation extends Simulation {
       .get("/products/${uuid}"))
 
   setUp(scn.inject(
-    rampConcurrentUsers(0) to (100) during (60 seconds),
-    constantConcurrentUsers(100) during (2 minutes))
+    rampConcurrentUsers(0) to (200) during (60 seconds),
+    constantConcurrentUsers(200) during (5 minutes))
     .protocols(httpProtocol))
 }
