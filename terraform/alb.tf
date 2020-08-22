@@ -1,4 +1,4 @@
-resource "aws_alb" "springecs" {
+resource "aws_alb" "albecs" {
   name = "springEcs"
   internal = false
 
@@ -13,7 +13,7 @@ resource "aws_alb" "springecs" {
   ]
 }
 
-resource "aws_alb_target_group" "springecs" {
+resource "aws_alb_target_group" "albecs" {
   name = "springEcs"
   protocol = "HTTP"
   port = "8080"
@@ -25,20 +25,19 @@ resource "aws_alb_target_group" "springecs" {
   }
 }
 
-resource "aws_alb_listener" "springecs" {
-  load_balancer_arn = aws_alb.springecs.arn
+resource "aws_alb_listener" "albecs" {
+  load_balancer_arn = aws_alb.albecs.arn
   port = "80"
   protocol = "HTTP"
 
   default_action {
-    target_group_arn = aws_alb_target_group.springecs.arn
+    target_group_arn = aws_alb_target_group.albecs.arn
     type = "forward"
   }
 
-  depends_on = [aws_alb_target_group.springecs]
+  depends_on = [aws_alb_target_group.albecs]
 }
 
-
 output "alb_dns_name" {
-  value = aws_alb.springecs.dns_name
+  value = aws_alb.albecs.dns_name
 }

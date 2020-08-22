@@ -3,7 +3,7 @@ resource "aws_ecs_task_definition" "springecs" {
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
   cpu = 256
-  memory = 1024
+  memory = 512
   execution_role_arn = var.task_role_arn
 //  container_definitions = file("ecs-service/task-definitions/spring-ecs.json")
   container_definitions = <<DEFINITION

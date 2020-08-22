@@ -23,7 +23,6 @@ data "aws_availability_zones" "available" {
 
 module "vpc" {
   source  = "github.com/terraform-aws-modules/terraform-aws-vpc"
-//  version = "~> 2.0"
 
   name = local.name
 
@@ -52,11 +51,28 @@ data "aws_secretsmanager_secret_version" "rds" {
   secret_id = "ecs_test_database"
 }
 
-//module "spring_ecs_service" {
+module "spring_ecs_service" {
+  source = "./ecs-service"
+  db_password = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["password"]
+  db_url = module.rds.rds_url
+  db_user = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["username"]
+  ecs_cluster_id = module.ecs.this_ecs_cluster_id
+  ecs_security_group = aws_security_group.ecs.id
+  load_balancer_arn = aws_alb_target_group.albecs
+  rds_security_group = module.rds.db_access_sg_id
+  subnet_ids = module.vpc.private_subnets
+  task_role_arn = aws_iam_role.ecs_task_assume.arn
+  docker_image_arn = var.docker_image_arn
+}
+
+//module "quarkus_ecs_service" {
 //  source = "./ecs-service"
-//  db_password = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["password"]
+//  db_url_param = "QUARKUS_DATASOURCE_JDBC_URL"
+//  db_user_param = "QUARKUS_DATASOURCE_USERNAME"
+//  db_password_param = "QUARKUS_DATASOURCE_PASSWORD"
 //  db_url = module.rds.rds_url
 //  db_user = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["username"]
+//  db_password = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["password"]
 //  ecs_cluster_id = module.ecs.this_ecs_cluster_id
 //  ecs_security_group = aws_security_group.ecs.id
 //  load_balancer_arn = aws_alb_target_group.springecs
@@ -65,23 +81,6 @@ data "aws_secretsmanager_secret_version" "rds" {
 //  task_role_arn = aws_iam_role.ecs_task_assume.arn
 //  docker_image_arn = var.docker_image_arn
 //}
-
-module "quarkus_ecs_service" {
-  source = "./ecs-service"
-  db_url_param = "QUARKUS_DATASOURCE_JDBC_URL"
-  db_user_param = "QUARKUS_DATASOURCE_USERNAME"
-  db_password_param = "QUARKUS_DATASOURCE_PASSWORD"
-  db_url = module.rds.rds_url
-  db_user = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["username"]
-  db_password = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["password"]
-  ecs_cluster_id = module.ecs.this_ecs_cluster_id
-  ecs_security_group = aws_security_group.ecs.id
-  load_balancer_arn = aws_alb_target_group.springecs
-  rds_security_group = module.rds.db_access_sg_id
-  subnet_ids = module.vpc.private_subnets
-  task_role_arn = aws_iam_role.ecs_task_assume.arn
-  docker_image_arn = var.docker_image_arn
-}
 
 #----- RDS  Services--------
 module "rds" {
