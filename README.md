@@ -13,14 +13,20 @@ Both applications will be using exactly the same infrastructure:
 
 For more information, please check the terraform folder which contains all the modules and resources used. 
 
-#Performance tests
+#Load tests
 
+Load testing has been done with Gatling (https://gatling.io). 
+The load test performs the following actions:
+1) Gets all the latest products
+2) Saves a new product
+3) Retrieves the product saved
 
+Each user will perform this action. 
+The test ramps up 200 users during the first minute and then keeps constant 200 users during 2 hours.
 
-#Spring-ecs
+# Rest Controller
 
-1. Build the docker image with the following command:
- mvn spring-boot:build-image 
-
-2. Tag and push the image to your aws repository:
-<check your push commands in AWS ECR>
+Both applications have implemented the following endpoints:
+- GET /products: Returns the last 20 products
+- GET /products/{id}: Returns one single product with the given Id
+- POST /products: Saves a new product sent in the payload 

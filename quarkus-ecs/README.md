@@ -33,6 +33,10 @@ If you want to learn more about building native executables, please consult http
 
 ./mvnw clean package -Dquarkus.container-image.build=true -DskipTests
 
+# Create a docker navtive image
+
+./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
+
 # Export Datasource Environment variables
 export QUARKUS_DATASOURCE_JDBC_URL=jdbc:mysql://localhost:3306/db
 export QUARKUS_DATASOURCE_USERNAME=user
