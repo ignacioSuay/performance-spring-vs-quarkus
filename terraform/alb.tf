@@ -1,5 +1,5 @@
 resource "aws_alb" "albecs" {
-  name = "springEcs"
+  name = "albEcs"
   internal = false
 
   security_groups = [
@@ -14,7 +14,7 @@ resource "aws_alb" "albecs" {
 }
 
 resource "aws_alb_target_group" "albecs" {
-  name = "springEcs"
+  name = "albEcs"
   protocol = "HTTP"
   port = "8080"
   vpc_id = module.vpc.vpc_id
