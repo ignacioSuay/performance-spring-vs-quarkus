@@ -1,1 +1,2 @@
-database_name = "YOUR_DATABASE_NAME"
+database_name     = "YOUR_DATABASE_NAME"
+docker_image_arn  = "YOUR_IMAGE_URI"
