@@ -1,5 +1,5 @@
-resource "aws_ecs_task_definition" "springecs" {
-  family                = "springecs"
+resource "aws_ecs_task_definition" "appecs" {
+  family                = "appecs"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
   cpu = 256
@@ -9,7 +9,7 @@ resource "aws_ecs_task_definition" "springecs" {
   container_definitions = <<DEFINITION
     [
   {
-    "name": "springecs",
+    "name": "appecs",
     "image": "${var.docker_image_arn}",
     "cpu": 256,
     "essential": true,
@@ -47,11 +47,11 @@ resource "aws_ecs_task_definition" "springecs" {
 
 }
 
-resource "aws_ecs_service" "springecs" {
-  name            = "springecs"
+resource "aws_ecs_service" "appecs" {
+  name            = "appecs"
   cluster         = var.ecs_cluster_id
   launch_type     = "FARGATE"
-  task_definition = aws_ecs_task_definition.springecs.arn
+  task_definition = aws_ecs_task_definition.appecs.arn
   desired_count   = 2
 
   network_configuration {
@@ -61,12 +61,12 @@ resource "aws_ecs_service" "springecs" {
 
   load_balancer {
     target_group_arn = var.load_balancer_arn.arn
-    container_name = "springecs"
+    container_name = "appecs"
     container_port = 8080
   }
   depends_on = [var.load_balancer_arn]
 }
 
-resource "aws_cloudwatch_log_group" "springecs" {
+resource "aws_cloudwatch_log_group" "appecs" {
   name = "/ecs/fargate-task-definition"
 }
