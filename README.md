@@ -3,7 +3,7 @@ A Spring vs Quarkus performance comparison
 
 The idea of this project is to build a simple API using Spring and Quarkus and compare their performance.
 
-#Infrastructure
+# Infrastructure
 This project uses terraform for creating and deploying resources to AWS. 
 Both applications will be using exactly the same infrastructure:
 - 1 Application Load Balancer (ALB)
@@ -20,7 +20,7 @@ Both applications have implemented the following endpoints:
 - GET /products/{id}: Returns one single product with the given Id
 - POST /products: Saves a new product.
 
-#Load tests
+# Load tests
  
 Load testing has been done with Gatling (https://gatling.io). 
 The load test performs the following actions:
@@ -30,3 +30,8 @@ The load test performs the following actions:
 
 Each user will perform this action. 
 The test ramps up 200 users during the first minute and then keeps constant 200 users during 2 hours.
+
+# Results
+Please have a look at the following blog post which contains the results and more information about the project:
+
+https://ignaciosuay.com/spring-boot-vs-quarkus-performance/
