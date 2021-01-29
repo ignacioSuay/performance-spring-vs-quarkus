@@ -3,7 +3,7 @@ package com.ignaciosuay.springecs.controller;
 import com.ignaciosuay.springecs.controller.dto.ProductDto;
 import com.ignaciosuay.springecs.model.Product;
 import com.ignaciosuay.springecs.repository.ProductRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
