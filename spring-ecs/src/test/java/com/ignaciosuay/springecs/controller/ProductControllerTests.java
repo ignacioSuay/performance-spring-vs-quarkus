@@ -47,7 +47,7 @@ public class ProductControllerTests {
         assertThat(result.getBody().getName()).isEqualTo(productName);
 
         //And
-        assertThat(productRepository.findById(result.getBody().getId())).isEmpty();
+        assertThat(productRepository.findById(result.getBody().getId())).isNotEmpty();
     }
 
     @Test
