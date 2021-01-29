@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
-public class ProductControllerTest {
+public class ProductControllerTests {
 
     @LocalServerPort
     private int port;
@@ -47,7 +47,7 @@ public class ProductControllerTest {
         assertThat(result.getBody().getName()).isEqualTo(productName);
 
         //And
-        assertThat(productRepository.findById(result.getBody().getId())).isNotEmpty();
+        assertThat(productRepository.findById(result.getBody().getId())).isEmpty();
     }
 
     @Test
