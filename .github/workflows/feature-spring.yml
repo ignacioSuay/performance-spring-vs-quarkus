@@ -8,7 +8,8 @@ on:
     branches-ignore: [ master ]
   pull_request:
     branches-ignore: [ master ]
-
+  workflow_dispatch: 
+    branches: [ master ]
 jobs:
   build:
     defaults:
