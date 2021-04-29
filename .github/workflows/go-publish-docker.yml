@@ -2,9 +2,7 @@ name: Feature branch
 
 on:
   push:
-    branches-ignore: [ master ]
-  pull_request:
-    branches-ignore: [ master ]
+    branches: [ master ]
   workflow_dispatch: 
     branches: [ master ]
 
