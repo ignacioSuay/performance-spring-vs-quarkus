@@ -8,7 +8,7 @@ How to use:
 $ go run main.go
 ```
 
-Build docker image with:
+Build docker image with (-t is for tagging):
 
 docker build . -t go-book
 
