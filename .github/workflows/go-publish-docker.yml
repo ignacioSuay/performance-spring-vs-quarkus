@@ -1,0 +1,23 @@
+name: Feature branch
+
+on:
+  workflow_dispatch: 
+    branches: [ master ]
+
+jobs:
+  build-and-push:
+    defaults:
+        run:
+          working-directory: go-ecs
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: docker://ghcr.io/kciter/aws-ecr-action:latest
+      with:
+        access_key_id: ${{ secrets.AWS_KEY_ID }}
+        secret_access_key: ${{ secrets.AWS_SECRET }}
+        account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+        repo: go-ecs
+        region: eu-west-1
+        tags: latest,${{ github.sha }}
+    
