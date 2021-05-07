@@ -56,7 +56,7 @@ data "aws_secretsmanager_secret_version" "rds" {
 //  db_password = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["password"]
 //  db_url = module.rds.rds_url
 //  db_user = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["username"]
-//  ecs_cluster_id = module.ecs.this_ecs_cluster_id
+//  ecs_cluster_id = module.ecs.ecs_cluster_id
 //  ecs_security_group = aws_security_group.ecs.id
 //  load_balancer_arn = aws_alb_target_group.albecs
 //  rds_security_group = module.rds.db_access_sg_id
@@ -65,15 +65,32 @@ data "aws_secretsmanager_secret_version" "rds" {
 //  docker_image_arn = var.docker_image_arn
 //}
 
-module "quarkus_ecs_service" {
+//module "quarkus_ecs_service" {
+//  source = "./ecs-service"
+//  db_url_param = "QUARKUS_DATASOURCE_JDBC_URL"
+//  db_user_param = "QUARKUS_DATASOURCE_USERNAME"
+//  db_password_param = "QUARKUS_DATASOURCE_PASSWORD"
+//  db_url = module.rds.rds_url
+//  db_user = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["username"]
+//  db_password = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["password"]
+//  ecs_cluster_id = module.ecs.ecs_cluster_id
+//  ecs_security_group = aws_security_group.ecs.id
+//  load_balancer_arn = aws_alb_target_group.albecs
+//  rds_security_group = module.rds.db_access_sg_id
+//  subnet_ids = module.vpc.private_subnets
+//  task_role_arn = aws_iam_role.ecs_task_assume.arn
+//  docker_image_arn = var.docker_image_arn
+//}
+
+module "go_ecs_service" {
   source = "./ecs-service"
-  db_url_param = "QUARKUS_DATASOURCE_JDBC_URL"
-  db_user_param = "QUARKUS_DATASOURCE_USERNAME"
-  db_password_param = "QUARKUS_DATASOURCE_PASSWORD"
-  db_url = module.rds.rds_url
+  db_url_param = "DB_HOST"
+  db_user_param = "DB_USER"
+  db_password_param = "DB_PASSWORD"
+  db_url = module.rds.rds_address
   db_user = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["username"]
   db_password = jsondecode(data.aws_secretsmanager_secret_version.rds.secret_string)["password"]
-  ecs_cluster_id = module.ecs.this_ecs_cluster_id
+  ecs_cluster_id = module.ecs.ecs_cluster_id
   ecs_security_group = aws_security_group.ecs.id
   load_balancer_arn = aws_alb_target_group.albecs
   rds_security_group = module.rds.db_access_sg_id
